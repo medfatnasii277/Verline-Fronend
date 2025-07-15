@@ -252,7 +252,7 @@ const UploadPainting: React.FC = () => {
   const fetchCategories = async () => {
     try {
       setCategoriesLoading(true);
-      const categories = await categoriesAPI.getCategories({ page: 1, limit: 100 });
+      const categories = await categoriesAPI.getCategories({ page: 1, limit: 50 });
       setCategories(categories || []);
     } catch (err) {
       console.error('Failed to fetch categories:', err);

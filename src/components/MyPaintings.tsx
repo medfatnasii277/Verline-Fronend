@@ -223,7 +223,7 @@ const MyPaintings: React.FC = () => {
     try {
       const response = await paintingsAPI.getMyPaintings({
         page: 1,
-        limit: 50, // Respect backend limit constraint
+        limit: 50,
         artist_id: user.id
       });
       setPaintings(response.items);

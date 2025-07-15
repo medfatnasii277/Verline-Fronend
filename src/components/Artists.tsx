@@ -179,7 +179,7 @@ const Artists: React.FC = () => {
       // Fetch all artists using the direct API call
       const response = await usersAPI.getUsers({
         page: 1,
-        limit: 100,
+        limit: 50,
         role: 'artist'
       });
       

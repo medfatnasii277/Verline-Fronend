@@ -146,7 +146,7 @@ export const usersAPI = {
   }> => {
     // Since there's no stats endpoint, we'll calculate from paintings
     try {
-      const response = await apiClient.get(`/paintings/?artist_id=${userId}&page=1&limit=1000`);
+      const response = await apiClient.get(`/paintings/?artist_id=${userId}&page=1&limit=50`);
       const paintings: Painting[] = response.data.items;
       
       const paintingsCount = paintings.length;
