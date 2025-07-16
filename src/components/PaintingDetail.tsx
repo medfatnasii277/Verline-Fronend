@@ -200,12 +200,8 @@ const PaintingDetail: React.FC = () => {
 
   const fetchComments = useCallback(async () => {
     try {
-      const response = await commentsAPI.getComments({
-        painting_id: Number(id),
-        page: 1,
-        limit: 50
-      });
-      setComments(response.items);
+      const response = await commentsAPI.getPaintingComments(Number(id));
+      setComments(response);
     } catch (err) {
       console.error('Failed to fetch comments:', err);
     }
