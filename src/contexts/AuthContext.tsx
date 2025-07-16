@@ -25,58 +25,28 @@ interface AuthContextType {
 
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
 
-// Mock database of users with different roles - matching real database users
+// Mock database of users with different roles - simplified to 2 accounts
 const mockUsers: User[] = [
-  // Real database artists
+  // Artist account (real database user)
   {
     id: 1,
     username: 'admin',
     email: 'admin@artgallery.com',
-    full_name: 'Gallery Administrator',
+    full_name: 'Gallery Artist',
     role: 'artist',
-    bio: 'Art Gallery System Administrator',
+    bio: 'Professional artist with multiple paintings in the gallery',
     created_at: '2025-07-13T00:32:17',
     is_active: true
   },
+  // Enthusiast account (real database user)
   {
-    id: 2,
-    username: 'painter1',
-    email: 'painter@artgallery.com',
-    full_name: 'Sample Artist',
-    role: 'artist',
-    bio: 'Professional artist specializing in contemporary works',
-    created_at: '2025-07-13T00:32:17',
-    is_active: true
-  },
-  {
-    id: 5,
-    username: 'test',
-    email: 'test@gmail.com',
-    full_name: 'test',
-    role: 'artist',
-    bio: 'test bio',
-    created_at: '2025-07-13T01:40:08',
-    is_active: true
-  },
-  // Mock enthusiasts (using high IDs to avoid conflicts)
-  {
-    id: 100,
+    id: 3,
     username: 'art_lover',
-    email: 'art@lover.com',
-    full_name: 'Art Lover',
+    email: 'user@example.com',
+    full_name: 'Art Enthusiast',
     role: 'enthusiast',
-    bio: 'Passionate about discovering new artists',
-    created_at: '2024-01-04T00:00:00Z',
-    is_active: true
-  },
-  {
-    id: 101,
-    username: 'gallery_visitor',
-    email: 'visitor@gallery.com',
-    full_name: 'Gallery Visitor',
-    role: 'enthusiast',
-    bio: 'Regular gallery visitor and art appreciator',
-    created_at: '2024-01-05T00:00:00Z',
+    bio: 'Passionate about discovering and rating new artwork',
+    created_at: '2025-07-13T00:37:07',
     is_active: true
   }
 ];

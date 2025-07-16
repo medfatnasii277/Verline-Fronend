@@ -84,7 +84,7 @@ export interface Rating {
   id: number;
   painting_id: number;
   user_id: number;
-  score: number;
+  rating: number;
   created_at: string;
   user_name?: string;
 }
@@ -291,11 +291,25 @@ export const ratingsAPI = {
     return response.data;
   },
 
+  getPaintingRatings: async (painting_id: number): Promise<Rating[]> => {
+    const response = await apiClient.get(`/ratings/painting/${painting_id}`);
+    return response.data;
+  },
+
+  getUserRatingForPainting: async (user_id: number, painting_id: number): Promise<{ rating: number | null }> => {
+    const response = await apiClient.get(`/ratings/user/${user_id}/painting/${painting_id}`);
+    return response.data;
+  },
+
   createOrUpdateRating: async (data: {
     painting_id: number;
-    score: number;
+    rating: number;
+    user_id: number;
   }): Promise<Rating> => {
-    const response = await apiClient.post('/ratings/', data);
+    const response = await apiClient.post(`/ratings/?user_id=${data.user_id}`, {
+      painting_id: data.painting_id,
+      rating: data.rating
+    });
     return response.data;
   },
 
@@ -324,21 +338,30 @@ export const commentsAPI = {
     return response.data;
   },
 
+  getPaintingComments: async (painting_id: number): Promise<Comment[]> => {
+    const response = await apiClient.get(`/comments/painting/${painting_id}`);
+    return response.data;
+  },
+
   createComment: async (data: {
     painting_id: number;
     content: string;
+    user_id: number;
   }): Promise<Comment> => {
-    const response = await apiClient.post('/comments/', data);
+    const response = await apiClient.post(`/comments/?user_id=${data.user_id}`, {
+      painting_id: data.painting_id,
+      content: data.content
+    });
     return response.data;
   },
 
-  updateComment: async (commentId: number, content: string): Promise<Comment> => {
-    const response = await apiClient.put(`/comments/${commentId}`, { content });
+  updateComment: async (commentId: number, content: string, user_id: number): Promise<Comment> => {
+    const response = await apiClient.put(`/comments/${commentId}?user_id=${user_id}`, { content });
     return response.data;
   },
 
-  deleteComment: async (commentId: number): Promise<void> => {
-    await apiClient.delete(`/comments/${commentId}`);
+  deleteComment: async (commentId: number, user_id: number): Promise<void> => {
+    await apiClient.delete(`/comments/${commentId}?user_id=${user_id}`);
   },
 };
 

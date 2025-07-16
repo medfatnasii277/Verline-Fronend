@@ -220,7 +220,7 @@ const PaintingDetail: React.FC = () => {
         limit: 1
       });
       if (response.items.length > 0) {
-        setUserRating(response.items[0].score);
+        setUserRating(response.items[0].rating);
       }
     } catch (err) {
       console.error('Failed to fetch user rating:', err);
@@ -244,7 +244,8 @@ const PaintingDetail: React.FC = () => {
     try {
       await ratingsAPI.createOrUpdateRating({
         painting_id: painting.id,
-        score: rating
+        rating: rating,
+        user_id: user.id
       });
       setUserRating(rating);
       
@@ -267,7 +268,8 @@ const PaintingDetail: React.FC = () => {
     try {
       const comment = await commentsAPI.createComment({
         painting_id: painting.id,
-        content: newComment.trim()
+        content: newComment.trim(),
+        user_id: user.id
       });
       setComments([comment, ...comments]);
       setNewComment('');
